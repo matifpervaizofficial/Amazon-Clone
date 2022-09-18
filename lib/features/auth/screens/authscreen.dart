@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:amazonclone/constants/colors.dart';
+import 'package:amazonclone/constants/widgets/custombutton.dart';
 import 'package:amazonclone/constants/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -40,6 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColors.greyBackgroundCOlor,
       body: SafeArea(
         child: Column(
           children: [
@@ -48,6 +50,9 @@ class _AuthScreenState extends State<AuthScreen> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ).pOnly(left: 10),
             ListTile(
+              tileColor: _auth == Auth.signup
+                  ? GlobalColors.backgroundColor
+                  : GlobalColors.greyBackgroundCOlor,
               title: Text("Create Account"),
               leading: Radio(
                 activeColor: GlobalColors.secondaryColor,
@@ -61,9 +66,10 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
             ),
             if (_auth == Auth.signup)
-              (Form(
-                key: _signupformkey,
-                child: Container(
+              Container(
+                color: GlobalColors.backgroundColor,
+                child: (Form(
+                  key: _signupformkey,
                   child: Column(
                     children: [
                       CustomTextfield(
@@ -78,12 +84,27 @@ class _AuthScreenState extends State<AuthScreen> {
                         height: 10,
                       ),
                       CustomTextfield(
-                          hinttext: "Name", addcontroller: _nameController)
+                          hinttext: "Name", addcontroller: _nameController),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomButton(
+                        height: 50,
+                        width: 500,
+                        BorderRadiusvalue: 10,
+                        color: GlobalColors.secondaryColor,
+                        ontap: () {},
+                        textsize: 17,
+                        title: "Create Account",
+                      )
                     ],
-                  ),
-                ).p(10),
-              )),
+                  ).p(10),
+                )),
+              ),
             ListTile(
+              tileColor: _auth == Auth.signin
+                  ? GlobalColors.backgroundColor
+                  : GlobalColors.greyBackgroundCOlor,
               title: Text("Sign in to Account"),
               leading: Radio(
                 activeColor: GlobalColors.secondaryColor,
@@ -96,6 +117,37 @@ class _AuthScreenState extends State<AuthScreen> {
                 },
               ),
             ),
+            if (_auth == Auth.signin)
+              (Container(
+                color: GlobalColors.backgroundColor,
+                child: (Form(
+                  key: _signinformkey,
+                  child: Column(
+                    children: [
+                      CustomTextfield(
+                          hinttext: "Email", addcontroller: _emailController),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextfield(
+                          hinttext: "Password",
+                          addcontroller: _passwordController),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomButton(
+                        height: 50,
+                        width: 500,
+                        BorderRadiusvalue: 10,
+                        color: GlobalColors.secondaryColor,
+                        ontap: () {},
+                        textsize: 17,
+                        title: "Create Account",
+                      )
+                    ],
+                  ).p(10),
+                )),
+              )),
           ],
         ),
       ),
